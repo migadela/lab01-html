@@ -5,75 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Контакти кав'ярні Ароматна Кава. Забронюйте столик або зробіть передзамовлення.">
     <title>Контакти - Ароматна Кава</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="../index.html">Головна</a> |
-            <a href="about.html">Про кав'ярню</a> |
-            <a href="contact.html">Контакти</a>
-        </nav>
+    <header class="site-header">
+        <div class="container">
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="../index.html">Головна</a></li>
+                    <li><a href="about.html">Про кав'ярню</a></li>
+                    <li><a href="contact.html" class="active">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <h1>Зв'яжіться з нами</h1>
-        <p>Заповніть форму нижче, щоб забронювати столик або залишити відгук.</p>
+    <main class="container">
+        <section class="card">
+            <h1>Зв'яжіться з нами</h1>
+            <p>Заповніть форму нижче, щоб забронювати столик або залишити відгук.</p>
 
-        <form action="#" method="GET">
-            <fieldset>
-                <legend>Ваші дані</legend>
-                <p>
-                    <label for="userName">Ваше ім'я (обов'язково):</label><br>
-                    <input type="text" id="userName" name="name" required minlength="2" maxlength="30" placeholder="Наприклад: Анна">
-                </p>
-                <p>
-                    <label for="userEmail">Ваш Email (обов'язково):</label><br>
-                    <input type="email" id="userEmail" name="email" required placeholder="email@example.com">
-                </p>
-                <p>
-                    <label for="userPhone">Телефон (необов'язково):</label><br>
-                    <input type="tel" id="userPhone" name="phone" placeholder="+380...">
-                </p>
-            </fieldset>
+            <form action="#" method="GET" class="contact-form">
+                <fieldset>
+                    <legend>Ваші дані</legend>
+                    <div class="form-group">
+                        <label for="userName">Ваше ім'я (обов'язково):</label>
+                        <input type="text" id="userName" name="name" required minlength="2" maxlength="30" placeholder="Наприклад: Анна">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userEmail">Ваш Email (обов'язково):</label>
+                        <input type="email" id="userEmail" name="email" required placeholder="email@example.com">
+                    </div>
 
-            <fieldset>
-                <legend>Деталі замовлення</legend>
-                <p>
-                    <label for="topic">Тема звернення:</label><br>
-                    <select id="topic" name="topic">
-                        <option value="table">Бронювання столика</option>
-                        <option value="order">Доставка</option>
-                        <option value="feedback">Відгук про заклад</option>
-                        <option value="other">Інше</option>
-                    </select>
-                </p>
+                    <div class="form-group">
+                        <label for="userPhone">Телефон (необов'язково):</label>
+                        <input type="tel" id="userPhone" name="phone" placeholder="+380...">
+                    </div>
+                </fieldset>
 
-                <p>Зручний спосіб зв’язку :</p>
-                <label>
-                    <input type="radio" name="contactWay" value="phone" checked> Зателефонуйте мені
-                </label><br>
-                <label>
-                    <input type="radio" name="contactWay" value="email"> Напишіть на Email
-                </label>
+                <fieldset>
+                    <legend>Деталі замовлення</legend>
+                    <div class="form-group">
+                        <label for="topic">Тема звернення:</label>
+                        <select id="topic" name="topic">
+                            <option value="table">Бронювання столика</option>
+                            <option value="order">Доставка</option>
+                            <option value="feedback">Відгук про заклад</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
 
-                <p>
-                    <label for="message">Ваші побажання або повідомлення:</label><br>
-                    <textarea id="message" name="message" rows="5" cols="40" placeholder="Напишіть тут час бронювання або інші деталі..."></textarea>
-                </p>
-            </fieldset>
+                    <div class="form-group">
+                        <p>Зручний спосіб зв’язку:</p>
+                        <label class="radio-label">
+                            <input type="radio" name="contactWay" value="phone" checked> Зателефонуйте мені
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="contactWay" value="email"> Напишіть на Email
+                        </label>
+                    </div>
 
-            <p>
-                <label>
-                    <input type="checkbox" name="agree" required>
-                    Я погоджуюсь з правилами закладу (обов'язково)
-                </label>
-            </p>
+                    <div class="form-group">
+                        <label for="message">Ваші побажання:</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Напишіть тут час бронювання або інші деталі..."></textarea>
+                    </div>
+                </fieldset>
 
-            <button type="submit">Надіслати замовлення</button>
-            <button type="reset">Очистити форму</button>
-        </form>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="agree" required>
+                        Я погоджуюсь з правилами закладу
+                    </label>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">Надіслати замовлення</button>
+                    <button type="reset" class="btn-reset">Очистити</button>
+                </div>
+            </form>
+        </section>
     </main>
-
+    
     <footer>
         <p>&copy; 2026 Зінченко Вікторія </p>
     </footer>

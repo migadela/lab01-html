@@ -5,37 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Дізнайтеся більше про історію нашої кав'ярні, подивіться відео про нас та послухайте нашу фірмову музику.">
     <title>Про нас - Ароматна Кава</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="../index.html">Головна</a> |
-            <a href="about.html">Про кав'ярню</a> |
-            <a href="contact.html">Контакти</a>
-        </nav>
+    <header class="site-header">
+        <div class="container">
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="../index.html">Головна</a></li>
+                    <li><a href="about.html" class="active">Про кав'ярню</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <h1>Історія нашої кав'ярні</h1>
-        <p>Ми відкрили "Ароматну Каву" з єдиною метою: дарувати людям радість через ідеальну чашку кави. Наші зерна обсмажуються за спеціальною технологією, а кожен бариста проходить суворе навчання, щоб створювати для вас шедеври.</p>
+    <main class="container">
+        <section class="card">
+            <h1>Історія нашої кав'ярні</h1>
+            <p>Ми відкрили "Aroma" з єдиною метою: дарувати людям радість через ідеальну чашку кави. Наші зерна обсмажуються за спеціальною технологією, а кожен бариста проходить суворе навчання, щоб створювати для вас шедеври.</p>
+        </section>
 
-        <h2>Атмосфера нашого закладу </h2>
-        <p>Подивіться коротке відео про те, який вигляд має процес створення ідеального настрою.</p>
-        
-        <video controls width="500">
-            <source src="../assets/media/video.mp4" type="video/mp4">
-            <p>Ваш браузер не підтримує HTML-відео. 
-               <a href="../assets/media/video.mp4">Завантажити відео</a>.
-            </p>
-        </video>
+        <div class="media-grid">
+            
+            <section class="card">
+                <h2>Атмосфера нашого закладу</h2>
+                <p>Подивіться, як створюється ідеальний настрій.</p>
+                <video controls class="responsive-media">
+                    <source src="../assets/media/video.mp4" type="video/mp4">
+                    <p>Ваш браузер не підтримує відео. <a href="../assets/media/video.mp4">Завантажити</a>.</p>
+                </video>
+            </section>
 
-        <h2>Музика нашої кав'ярні </h2>
-        <p>Увімкніть, щоб відчути наш спокійний вайб!</p>
-        
-        <audio controls>
-            <source src="../assets/media/music.mp3" type="audio/mpeg">
-            <p>Ваш браузер не підтримує цей аудіофайл.</p>
-        </audio>
+            <section class="card">
+                <h2>Музика кав'ярні</h2>
+                <p>Відчуйте наш спокійний вайб!</p>
+                <audio controls class="responsive-media">
+                    <source src="../assets/media/music.mp3" type="audio/mpeg">
+                    <p>Ваш браузер не підтримує аудіо.</p>
+                </audio>
+            </section>
+            
+        </div>
     </main>
 
     <footer>
