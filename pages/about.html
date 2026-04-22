@@ -12,6 +12,8 @@
     <header class="site-header">
         <div class="container">
             <nav>
+                <button class="menu-toggle" aria-expanded="false">☰ Меню</button>
+                <button class="theme-toggle">Змінити тему</button>
                 <ul class="nav-list">
                     <li><a href="../index.html">Головна</a></li>
                     <li><a href="about.html" class="active">Про кав'ярню</a></li>
@@ -27,8 +29,25 @@
             <p>Ми відкрили "Aroma" з єдиною метою: дарувати людям радість через ідеальну чашку кави. Наші зерна обсмажуються за спеціальною технологією, а кожен бариста проходить суворе навчання, щоб створювати для вас шедеври.</p>
         </section>
 
+        <section class="card">
+            <h2>Наші принципи </h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">Які зерна ми використовуємо?</button>
+                    <div class="accordion-content" hidden>
+                        <p>Ми працюємо тільки з арабікою класу Specialty, яку закуповуємо у перевірених фермерів.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">Як швидко готується замовлення?</button>
+                    <div class="accordion-content" hidden>
+                        <p>Зазвичай приготування напою займає до 5 хвилин, адже ми робимо все з любов'ю.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="media-grid">
-            
             <section class="card">
                 <h2>Атмосфера нашого закладу</h2>
                 <p>Подивіться, як створюється ідеальний настрій.</p>
@@ -46,12 +65,14 @@
                     <p>Ваш браузер не підтримує аудіо.</p>
                 </audio>
             </section>
-            
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Зінченко Вікторія</p>
+        <p>&copy; <span id="current-year"></span> Зінченко Вікторія</p>
     </footer>
+
+    <button class="back-to-top" hidden>↑ Вгору</button>
+    <script src="../js/main.js" defer></script>
 </body>
 </html>

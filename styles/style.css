@@ -215,3 +215,150 @@ dt:nth-of-type(even) {
 .card p:first-of-type {
     font-weight: 500;
 }
+/* --- ПУНКТ 3: МОБІЛЬНЕ МЕНЮ --- */
+
+/* На комп'ютері ховаємо кнопку */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Налаштування для екранів менше 768px (телефони) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Показуємо кнопку */
+    }
+    
+    .nav-list {
+        display: none; /* Ховаємо список меню */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        gap: 15px;
+        padding-top: 15px;
+    }
+
+    /* Клас, який буде додавати JavaScript для показу меню */
+    .nav-list.is-open {
+        display: flex; 
+    }
+}
+/* Тема за замовчуванням у нас світла, а це стилі для темної */
+body.theme-dark {
+    background-color: #2c2420; /* Темний кавовий фон */
+    color: #f0f0f0;            /* Світлий текст */
+}
+
+/* Робимо картки темними, щоб вони виділялися */
+body.theme-dark .card {
+    background-color: #3e3633;
+    color: #f0f0f0;
+}
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: #5c4033;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+.accordion-header {
+    width: 100%;
+    padding: 15px;
+    background: #f4f4f4;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.accordion-content {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+/* --- ПУНКТ 7: Фільтри --- */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Щоб на телефоні переносилися на новий рядок */
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #5c4033;
+    background: transparent;
+    color: #5c4033;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #5c4033;
+    color: white;
+}
+
+.menu-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+/* --- ПУНКТ 9: Модальне вікно --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Напівпрозорий темний фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Щоб вікно було поверх усього */
+}
+
+/* Коли є атрибут hidden, ховаємо повністю */
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Щоб модалка теж ставала темною при темній темі */
+body.theme-dark .modal-content {
+    background: #3e3633;
+    color: white;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 1.5rem;
+    background: none; border: none; cursor: pointer;
+    color: inherit;
+}
+
+.btn-open-modal {
+    background: #d35400; color: white;
+    padding: 12px 24px; border: none; border-radius: 25px;
+    font-size: 1.1rem; cursor: pointer; font-weight: bold;
+}
+.btn-open-modal:hover { background: #a04000; }

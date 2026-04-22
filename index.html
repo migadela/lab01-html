@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <script src="app.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Затишна кав'ярня. Найсмачніша кава, свіжі десерти та приємна атмосфера.">
@@ -11,18 +10,22 @@
 </head>
 <body>
     <header class="site-header">
-    <div class="container">
-        <nav>
-            <ul class="nav-list">
-                <li><a href="index.html" class="active">Головна</a></li>
-                <li><a href="pages/about.html">Про кав'ярню</a></li>
-                <li><a href="pages/contact.html">Контакти</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+        <div class="container">
+            <nav>
+                <button class="menu-toggle" aria-expanded="false">☰ Меню</button>
+                <button class="theme-toggle">Змінити тему</button>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">Головна</a></li>
+                    <li><a href="pages/about.html">Про кав'ярню</a></li>
+                    <li><a href="pages/contact.html">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-   <main class="container">
+    <main class="container">
+        <button class="btn-open-modal" style="margin: 15px 0;">Отримати знижку!</button>
+        
         <section class="card">
             <h1>Вітаємо у кав'ярні "Aroma"!</h1>
             <p>Ми раді бачити вас на нашому сайті. У нас ви знайдете <strong>найсмачнішу каву</strong> у місті та завжди свіжу випічку.</p>
@@ -55,44 +58,67 @@
 
         <section class="card">
             <h2>Наше Меню</h2>
-        <dl>
-            <dt><strong>Еспресо — 45 грн</strong></dt>
-            <dd>Міцна та ароматна основа для всіх наших напоїв.</dd>
-            <br>
-            <dt><strong>Капучино — 65 грн</strong></dt>
-            <dd>Класичний кавовий напій з ніжною молочною пінкою.</dd>
-            <br>
-            <dt><strong>Карамельне Макіато — 75 грн</strong></dt>
-            <dd>Тришарове задоволення: гаряче молоко, кава та густа піна.</dd>
-            <br>
-            
-            <dt><strong>Матча Лате — 85 грн</strong></dt>
-            <dd>Японський зелений чай з густою молочною пінкою. Справжній заряд енергії!</dd>
-            <br>
-            <dt><strong>Айс-Матча з полуницею — 95 грн</strong></dt>
-            <dd>Освіжаючий напій на основі матчі, льоду та натурального полуничного пюре.</dd>
-            <br>
-            
-            <dt><strong>Круасан — 55 грн</strong></dt>
-            <dd>Свіжоспечений французький круасан з шоколадом або мигдалем.</dd>
-            <br>
-            <dt><strong>Чизкейк Нью-Йорк — 90 грн</strong></dt>
-            <dd>Класичний сирний десерт з полуничним джемом.</dd>
-            <br>
-            <dt><strong>Тирамісу — 95 грн</strong></dt>
-            <dd>Ніжний італійський десерт на основі маскарпоне та печива савоярді.</dd>
-            <br>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Усе меню</button>
+                <button class="filter-btn" data-filter="drinks">Напої</button>
+                <button class="filter-btn" data-filter="desserts">Десерти</button>
+            </div>
 
-            <dt><strong>Лавандовий Раф — 85 грн</strong></dt>
-            <dd>Ніжний вершковий напій з легким ароматом гірської лаванди.</dd>
-        </dl>
-            
-            <button type="button" id="magic-button">Натисни мене!</button>
+            <div class="menu-list">
+                <div class="menu-item" data-category="drinks">
+                    <strong>Еспресо — 45 грн</strong>
+                    <p>Міцна та ароматна основа для всіх наших напоїв.</p>
+                </div>
+                <div class="menu-item" data-category="drinks">
+                    <strong>Капучино — 65 грн</strong>
+                    <p>Класичний кавовий напій з ніжною молочною пінкою.</p>
+                </div>
+                <div class="menu-item" data-category="drinks">
+                    <strong>Карамельне Макіато — 75 грн</strong>
+                    <p>Тришарове задоволення: гаряче молоко, кава та густа піна.</p>
+                </div>
+                <div class="menu-item" data-category="drinks">
+                    <strong>Матча Лате — 85 грн</strong>
+                    <p>Японський зелений чай з густою молочною пінкою. Справжній заряд енергії!</p>
+                </div>
+                <div class="menu-item" data-category="drinks">
+                    <strong>Айс-Матча з полуницею — 95 грн</strong>
+                    <p>Освіжаючий напій на основі матчі, льоду та натурального полуничного пюре.</p>
+                </div>
+                <div class="menu-item" data-category="drinks">
+                    <strong>Лавандовий Раф — 85 грн</strong>
+                    <p>Ніжний вершковий напій з легким ароматом гірської лаванди.</p>
+                </div>
+                
+                <div class="menu-item" data-category="desserts">
+                    <strong>Круасан — 55 грн</strong>
+                    <p>Свіжоспечений французький круасан з шоколадом або мигдалем.</p>
+                </div>
+                <div class="menu-item" data-category="desserts">
+                    <strong>Чизкейк Нью-Йорк — 90 грн</strong>
+                    <p>Класичний сирний десерт з полуничним джемом.</p>
+                </div>
+                <div class="menu-item" data-category="desserts">
+                    <strong>Тирамісу — 95 грн</strong>
+                    <p>Ніжний італійський десерт на основі маскарпоне та печива савоярді.</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Зінченко Вікторія</p>
+        <p>&copy; <span id="current-year"></span> Зінченко Вікторія</p>
     </footer>
+
+    <div class="modal-overlay" id="promoModal" hidden>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>Секретна знижка! 🎁</h2>
+            <p>Покажіть це вікно баристі та отримайте -15% на улюблену каву або десерт.</p>
+        </div>
+    </div>
+
+    <button class="back-to-top" hidden>↑ Вгору</button>
+    <script src="js/main.js" defer></script>
 </body>
 </html>
