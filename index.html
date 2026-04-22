@@ -58,51 +58,29 @@
 
         <section class="card">
             <h2>Наше Меню</h2>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Усе меню</button>
-                <button class="filter-btn" data-filter="drinks">Напої</button>
-                <button class="filter-btn" data-filter="desserts">Десерти</button>
+            
+            <div class="catalog-controls" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                <input type="text" id="searchInput" placeholder="Пошук страви..." style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                
+                <select id="sortSelect" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="default">Сортування</option>
+                    <option value="price-asc">Від дешевих</option>
+                    <option value="price-desc">Від дорогих</option>
+                </select>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Усе меню</button>
+                    <button class="filter-btn" data-filter="drinks">Напої</button>
+                    <button class="filter-btn" data-filter="desserts">Десерти</button>
+                </div>
             </div>
 
-            <div class="menu-list">
-                <div class="menu-item" data-category="drinks">
-                    <strong>Еспресо — 45 грн</strong>
-                    <p>Міцна та ароматна основа для всіх наших напоїв.</p>
+            <div id="catalog-status" style="text-align: center; margin: 20px 0; font-weight: bold;"></div>
+
+            <div class="menu-list" data-catalog style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
                 </div>
-                <div class="menu-item" data-category="drinks">
-                    <strong>Капучино — 65 грн</strong>
-                    <p>Класичний кавовий напій з ніжною молочною пінкою.</p>
-                </div>
-                <div class="menu-item" data-category="drinks">
-                    <strong>Карамельне Макіато — 75 грн</strong>
-                    <p>Тришарове задоволення: гаряче молоко, кава та густа піна.</p>
-                </div>
-                <div class="menu-item" data-category="drinks">
-                    <strong>Матча Лате — 85 грн</strong>
-                    <p>Японський зелений чай з густою молочною пінкою. Справжній заряд енергії!</p>
-                </div>
-                <div class="menu-item" data-category="drinks">
-                    <strong>Айс-Матча з полуницею — 95 грн</strong>
-                    <p>Освіжаючий напій на основі матчі, льоду та натурального полуничного пюре.</p>
-                </div>
-                <div class="menu-item" data-category="drinks">
-                    <strong>Лавандовий Раф — 85 грн</strong>
-                    <p>Ніжний вершковий напій з легким ароматом гірської лаванди.</p>
-                </div>
-                
-                <div class="menu-item" data-category="desserts">
-                    <strong>Круасан — 55 грн</strong>
-                    <p>Свіжоспечений французький круасан з шоколадом або мигдалем.</p>
-                </div>
-                <div class="menu-item" data-category="desserts">
-                    <strong>Чизкейк Нью-Йорк — 90 грн</strong>
-                    <p>Класичний сирний десерт з полуничним джемом.</p>
-                </div>
-                <div class="menu-item" data-category="desserts">
-                    <strong>Тирамісу — 95 грн</strong>
-                    <p>Ніжний італійський десерт на основі маскарпоне та печива савоярді.</p>
-                </div>
-            </div>
+            
+            <button id="loadMoreBtn" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; display: none;">Показати ще</button>
         </section>
     </main>
 
@@ -120,5 +98,14 @@
 
     <button class="back-to-top" hidden>↑ Вгору</button>
     <script src="js/main.js" defer></script>
+    <div class="modal-overlay" id="itemModal" hidden>
+    <div class="modal-content" style="max-width: 500px; padding: 20px; background: white; border-radius: 10px;">
+        <button class="modal-close" id="closeItemModal" style="float: right;">&times;</button>
+        <img id="modalImage" src="" alt="Товар" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;">
+        <h2 id="modalTitle" style="color: #d35400;"></h2>
+        <strong id="modalPrice"></strong>
+        <p id="modalDesc"></p>
+    </div>
+</div>
 </body>
 </html>

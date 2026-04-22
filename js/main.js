@@ -4,16 +4,19 @@
 document.addEventListener('DOMContentLoaded', init);
 
 // Головна функція ініціалізації (як вимагає методичка)
-function init() {
+async function init() {
     initActiveNav();
     initMenuToggle();
     initThemeToggle();
     initBackToTop();
     initFooterYear();
     initAccordion();
-    initFilters();
+    //initFilters();
     initContactForm();
     initModal();
+    initFavorites();
+    await initCatalogPage();
+
 }
 
 // ==========================================
@@ -255,4 +258,215 @@ function initModal() {
             modal.hidden = true;
         }
     });
+}
+// ==========================================
+// ПРАКТИЧНА 9-10: Робота з даними (Каталог)
+// ==========================================
+
+async function initCatalogPage() {
+    const catalogContainer = document.querySelector('[data-catalog]');
+    const statusMsg = document.getElementById('catalog-status');
+
+    // Якщо ми не на сторінці з каталогом — зупиняємось
+    if (!catalogContainer || !statusMsg) return;
+
+    try {
+        // 1. Стан ЗАВАНТАЖЕННЯ (Loading state)
+        statusMsg.textContent = 'Завантаження смачненького... ⏳';
+        statusMsg.style.color = '#5c4033';
+        catalogContainer.innerHTML = ''; // Очищаємо контейнер
+
+        // 2. Отримуємо дані (Fetch)
+        const response = await fetch('data/items.json'); 
+        
+        // Перевіряємо, чи успішна відповідь
+        if (!response.ok) {
+            throw new Error('Не вдалося знайти файл з даними');
+        }
+
+        const items = await response.json(); // Перетворюємо відповідь у масив об'єктів
+
+        // 3. Стан УСПІХУ
+        statusMsg.textContent = ''; // Прибираємо напис про завантаження
+        
+        // Малюємо картки
+        renderCatalog(items, catalogContainer);
+
+        // ВМИКАЄМО ПОШУК ТА ФІЛЬТРИ:
+        initCatalogControls(items);
+        initDetailsModal(items);
+
+    } catch (error) {
+        // 4. Стан ПОМИЛКИ (Error state)
+        console.error(error);
+        statusMsg.textContent = 'Ой! Не вдалося завантажити меню. Спробуйте оновити сторінку. 😢';
+        statusMsg.style.color = 'red';
+    }
+}
+
+// Функція для малювання карток (Динамічний рендеринг)
+function renderCatalog(items, container) {
+    if (items.length === 0) {
+        container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">На жаль, за вашим запитом нічого не знайдено.</p>';
+        return;
+    }
+
+    const favorites = JSON.parse(localStorage.getItem('aroma_favorites') || '[]');
+
+    const htmlString = items.map(item => {
+        const isFav = favorites.includes(item.id); 
+        const btnText = isFav ? '❤️ В обраному' : '🤍 В обране';
+        const btnStyle = isFav ? 'background: #d35400; color: white;' : 'background: transparent; color: #d35400;';
+
+        return `
+        <div class="menu-item card" data-category="${item.category}" style="display: flex; flex-direction: column; padding: 15px;">
+            <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+            <strong style="font-size: 1.2rem; color: #d35400;">${item.title} — ${item.price} грн</strong>
+            <p style="flex-grow: 1;">${item.description}</p>
+            
+            <button class="btn-favorite" data-id="${item.id}" style="margin-top: 10px; padding: 8px; border: 1px solid #d35400; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; ${btnStyle}">
+                ${btnText}
+            </button>
+
+            <button class="btn-details" data-id="${item.id}" style="margin-top: 10px; padding: 8px; background: #5c4033; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                🔍 Детальніше
+            </button>
+        </div>
+        `;
+    }).join('');
+
+    container.innerHTML = htmlString;
+}
+// Функція для керування пошуком, фільтрами та сортуванням
+function initCatalogControls(items) {
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const catalogContainer = document.querySelector('[data-catalog]');
+    const loadMoreBtn = document.getElementById('loadMoreBtn'); // <-- НОВЕ
+
+    let currentSearch = '';
+    let currentCategory = 'all';
+    let currentSort = 'default';
+    let visibleCount = 4; // показуємо спочатку 4
+
+    function applyFiltersAndRender() {
+        let filteredItems = items.filter(item => {
+            const matchesSearch = item.title.toLowerCase().includes(currentSearch.toLowerCase()) || 
+                                  item.description.toLowerCase().includes(currentSearch.toLowerCase());
+            const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+            return matchesSearch && matchesCategory;
+        });
+
+        if (currentSort === 'price-asc') {
+            filteredItems.sort((a, b) => a.price - b.price);
+        } else if (currentSort === 'price-desc') {
+            filteredItems.sort((a, b) => b.price - a.price);
+        }
+
+        // показуємо тільки частину (slice)
+        const itemsToShow = filteredItems.slice(0, visibleCount);
+        renderCatalog(itemsToShow, catalogContainer);
+
+        //  ховаємо або показуємо кнопку
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = (visibleCount < filteredItems.length) ? 'block' : 'none';
+        }
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            visibleCount = 4; //  скидаємо при пошуку
+            applyFiltersAndRender();
+        });
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.getAttribute('data-filter');
+            visibleCount = 4; //  скидаємо при фільтрації
+            applyFiltersAndRender();
+        });
+    });
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            applyFiltersAndRender();
+        });
+    }
+
+    // "Показати ще"
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            visibleCount += 4; 
+            applyFiltersAndRender();
+        });
+    }
+
+    applyFiltersAndRender(); // Початковий рендер
+}
+// ==========================================
+// 8. Логіка Обраного (Favorites)
+// ==========================================
+function initFavorites() {
+    const catalogContainer = document.querySelector('[data-catalog]');
+    if (!catalogContainer) return;
+
+    // Слухаємо кліки по всьому каталогу
+    catalogContainer.addEventListener('click', (event) => {
+        // Шукаємо, чи клікнули саме по кнопці "В обране"
+        const btn = event.target.closest('.btn-favorite');
+        if (!btn) return;
+
+        // Беремо ID товару з атрибута data-id
+        const itemId = btn.getAttribute('data-id');
+        
+        // Дістаємо поточний масив обраного з пам'яті
+        let favorites = JSON.parse(localStorage.getItem('aroma_favorites') || '[]');
+
+        // Перевіряємо, чи є вже цей товар у списку
+        if (favorites.includes(itemId)) {
+            // Якщо Є — видаляємо його (залишаємо всі, крім цього ID)
+            favorites = favorites.filter(id => id !== itemId);
+            btn.innerHTML = '🤍 В обране';
+            btn.style.background = 'transparent';
+            btn.style.color = '#d35400';
+        } else {
+            // Якщо НЕМАЄ — додаємо його
+            favorites.push(itemId);
+            btn.innerHTML = '❤️ В обраному';
+            btn.style.background = '#d35400';
+            btn.style.color = 'white';
+        }
+
+        // Зберігаємо оновлений список назад у пам'ять браузера
+        localStorage.setItem('aroma_favorites', JSON.stringify(favorites));
+    });
+}
+function initDetailsModal(items) {
+    const catalogContainer = document.querySelector('[data-catalog]');
+    const modal = document.getElementById('itemModal');
+    const closeBtn = document.getElementById('closeItemModal');
+
+    catalogContainer.addEventListener('click', (event) => {
+        const btn = event.target.closest('.btn-details');
+        if (!btn) return;
+
+        const itemId = btn.getAttribute('data-id');
+        const item = items.find(i => i.id === itemId);
+
+        if (item) {
+            document.getElementById('modalImage').src = item.image;
+            document.getElementById('modalTitle').textContent = item.title;
+            document.getElementById('modalPrice').textContent = `${item.price} грн`;
+            document.getElementById('modalDesc').textContent = item.fullDescription;
+            modal.hidden = false;
+        }
+    });
+
+    closeBtn.addEventListener('click', () => modal.hidden = true);
 }

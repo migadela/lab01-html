@@ -1,0 +1,77 @@
+[
+  {
+    "id": "1",
+    "title": "Еспресо",
+    "category": "drinks",
+    "description": "Міцна та ароматна основа для всіх наших напоїв.",
+    
+    "price": 45,
+    "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=80",
+    "fullDescription": "Інгредієнти: Вода, мелена кава. Калорійність: 2 ккал."
+  },
+  {
+    "id": "2",
+    "title": "Капучино",
+    "category": "drinks",
+    "description": "Класичний кавовий напій з ніжною молочною пінкою.",
+    "price": 65,
+    "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80"
+  },
+  {
+    "id": "3",
+    "title": "Карамельне Макіато",
+    "category": "drinks",
+    "description": "Тришарове задоволення: гаряче молоко, кава та густа піна.",
+    "price": 75,
+    "image": "assets/img/mak.png"
+  },
+  {
+    "id": "4",
+    "title": "Матча Лате",
+    "category": "drinks",
+    "description": "Японський зелений чай з густою молочною пінкою. Справжній заряд енергії!",
+    "price": 85,
+    "image": "assets/img/matcha.png"
+  },
+  {
+    "id": "5",
+    "title": "Айс-Матча з полуницею",
+    "category": "drinks",
+    "description": "Освіжаючий напій на основі матчі, льоду та натурального полуничного пюре.",
+    "price": 95,
+    "image": "assets/img/im.png"
+  },
+  {
+    "id": "6",
+    "title": "Лавандовий Раф",
+    "category": "drinks",
+    "description": "Ніжний вершковий напій з легким ароматом гірської лаванди.",
+    "price": 85,
+    "image": "assets/img/raf.png"
+  },
+  {
+    "id": "7",
+    "title": "Круасан",
+    "category": "desserts",
+    "description": "Свіжоспечений французький круасан з шоколадом або мигдалем.",
+    "price": 55,
+    "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80",
+    "fullDescription": "Інгредієнти: круасан масляний, шоколадно-горіхова паста, цукрова пудра. Калорійність: 539 ккал."
+  },
+  {
+    "id": "8",
+    "title": "Чизкейк Нью-Йорк",
+    "category": "desserts",
+    "description": "Класичний сирний десерт з джемом.",
+    "price": 90,
+    "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=80"
+  },
+  {
+    "id": "9",
+    "title": "Тирамісу",
+    "category": "desserts",
+    "description": "Ніжний італійський десерт на основі маскарпоне та печива савоярді.",
+    "price": 95,
+    "image": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400&q=80"
+  }
+]
