@@ -84,6 +84,31 @@
         </section>
     </main>
 
+<section id="admin-section" style="background: #fdf6e3; padding: 20px; margin-bottom: 30px; border-radius: 8px; border: 2px dashed #d35400;">
+    <h2 style="color: #d35400;">⚙️ Адмін-панель: Додати новий товар</h2>
+    <form id="add-item-form" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px;">
+        
+        <input type="text" id="item-title" placeholder="Назва (напр. Еспресо)" required style="padding: 8px;">
+        
+        <input type="number" id="item-price" placeholder="Ціна (грн)" required min="1" style="padding: 8px;">
+        
+        <select id="item-category" required style="padding: 8px;">
+            <option value="" disabled selected>Оберіть категорію...</option>
+            <option value="drinks">Напої</option>
+            <option value="desserts">Десерти</option>
+        </select>
+        
+        <input type="text" id="item-image" placeholder="Посилання на картинку (URL або assets/...)" required style="padding: 8px;">
+        
+        <textarea id="item-desc" placeholder="Опис товару..." required style="padding: 8px;"></textarea>
+        
+        <button type="submit" style="padding: 10px; background: #d35400; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 5px;">
+            ➕ Додати в меню
+        </button>
+        <p id="form-feedback" style="font-weight: bold; margin-top: 5px;"></p>
+    </form>
+</section>
+
     <footer>
         <p>&copy; <span id="current-year"></span> Зінченко Вікторія</p>
     </footer>
@@ -97,7 +122,11 @@
     </div>
 
     <button class="back-to-top" hidden>↑ Вгору</button>
-    <script src="js/main.js" defer></script>
+    <script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/catalog.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/form.js" defer></script>
     <div class="modal-overlay" id="itemModal" hidden>
     <div class="modal-content" style="max-width: 500px; padding: 20px; background: white; border-radius: 10px;">
         <button class="modal-close" id="closeItemModal" style="float: right;">&times;</button>
